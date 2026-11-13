@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#fafafa">
+<title>Lesson 4 - Worth the Hype?</title>
+<style>
+:root{--bg:#fafafa;--surface:#fff;--ink:#25252b;--sub:#60616b;--muted:#82838d;--line:#e9e9ec;--soft:#f7f7f8;--accent:#755e72;--accent-light:#f3edf2;--good:#257a54;--bad:#be4c50;--shadow:0 7px 30px #17101808}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.69}button,input,textarea,select{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid #ab88a7;outline-offset:3px}button:disabled{opacity:.48;cursor:default}a{color:var(--accent)}#app{min-height:100vh;display:flex}
+.rail{position:sticky;top:0;height:100vh;width:260px;flex:0 0 260px;background:#fff;border-right:1px solid var(--line);display:flex;flex-direction:column;z-index:20}.brand{display:flex;gap:12px;align-items:center;padding:25px 19px 19px}.brand-mark{width:48px;height:48px;border-radius:13px;background:#28252b;color:#fff;display:grid;place-items:center;font-weight:850;letter-spacing:-1px;font-size:20px}.brand-mark span{color:#dba7c2}.brand-title{font-weight:850;font-size:14px;line-height:1.3;letter-spacing:.3px}.brand-sub{font-size:12px;letter-spacing:1.1px;color:var(--muted);margin-top:4px}.rail-rule{height:1px;background:var(--line);margin:0 19px 12px}.nav-list{padding:0 9px 14px;overflow:auto;flex:1}.nav-section{padding:15px 12px 7px;font-size:11px;color:#a58a9b;letter-spacing:1.3px;font-weight:800;text-transform:uppercase}.nav-link{width:100%;display:flex;align-items:center;gap:10px;padding:10px 11px;border:0;border-radius:10px;background:transparent;text-align:left;color:#65636c;font-size:14px;line-height:1.34}.nav-link:hover{background:#f6f4f5}.nav-link.active{background:var(--accent-light);color:#302634;font-weight:750}.nav-link.done .nav-no{background:#e7f1eb;color:var(--good)}.nav-no{min-width:30px;height:30px;border-radius:8px;background:#f1f0f2;color:#91909a;display:grid;place-items:center;font-weight:800;font-size:12px}.nav-link.active .nav-no{background:var(--accent);color:white}.nav-title{flex:1}.rail-foot{border-top:1px solid var(--line);padding:15px 21px;font-size:12px;color:var(--muted)}.rail-meter{height:7px;border-radius:10px;background:#eeeef0;margin-top:9px;overflow:hidden}.rail-meter div{height:100%;background:#8a7087;transition:width .2s}
+.main{flex:1;min-width:0}.topbar{height:72px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 40px;gap:12px}.top-kicker{font-size:12px;color:var(--muted);letter-spacing:1px;font-weight:800}.top-actions{display:flex;align-items:center;gap:10px}.save-pill{font-size:12px;color:var(--good);white-space:nowrap}.ghost-btn{border:1px solid #e5e3e6;border-radius:9px;background:#fff;padding:10px 13px;color:#55545d;font-size:13px;font-weight:700}.ghost-btn:hover{background:#f8f6f8}.mobile-menu{display:none}.reading{max-width:1090px;margin:auto;padding:37px 42px 40px}.kicker{color:#9a6f8a;font-size:13px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase}.page-title{font-size:clamp(32px,4vw,45px);line-height:1.15;letter-spacing:-1.4px;font-weight:850;margin:10px 0 14px}.page-desc{font-size:17px;color:var(--sub);margin:0 0 23px}.progress-outer{height:5px;background:#eae8ec;overflow:hidden;border-radius:100px;margin:0 0 24px}.progress-inner{height:100%;background:#8d7289;transition:width .25s}.surface{background:var(--surface);border:1px solid #ebebee;border-radius:18px;padding:31px 35px;box-shadow:var(--shadow)}.section{margin:0 0 27px}.section:last-child{margin-bottom:0}.section-kicker{text-transform:uppercase;letter-spacing:1.2px;color:#99758b;font-weight:850;font-size:14px;margin:0 0 10px}.section h2{font-size:25px;line-height:1.3;letter-spacing:-.45px;margin:0 0 12px}.section h3{font-size:21px;margin:0 0 12px}.section p{margin:9px 0 14px}.muted{color:var(--sub)}.small{font-size:15px}.micro{font-size:13px;color:var(--muted)}.lead{font-size:19px;font-weight:650;color:#3c3b44}.line{border:0;border-top:1px solid var(--line);margin:23px 0}.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}.card{padding:19px;border:1px solid var(--line);border-radius:13px;background:#fff}.card.tint{background:#fbf9fb}.card h3{font-size:19px;margin:2px 0 7px}.card p{margin:5px 0;font-size:17px}.soft{background:#f8f7f9;border:1px solid #ece9ee;border-radius:12px;padding:17px 19px;margin:13px 0}.soft p{margin:5px 0}.chip{display:inline-block;border-radius:999px;padding:5px 12px;background:#f1ebf0;color:#77566c;font-weight:800;font-size:13px;letter-spacing:.3px}.bignum{font-size:35px;font-weight:850;line-height:1.1}.hero{border-radius:16px;background:linear-gradient(128deg,#302933 0%,#615068 51%,#ad7896 100%);padding:31px;color:#fff;min-height:204px;overflow:hidden;position:relative;display:flex;flex-direction:column;justify-content:center}.hero::after{content:'S  A  B  C  F';position:absolute;right:-8px;bottom:-54px;transform:rotate(-13deg);font-size:100px;font-weight:900;letter-spacing:-9px;color:#fff1;white-space:nowrap;pointer-events:none}.hero h2{font-size:33px;max-width:530px;margin:0 0 8px;line-height:1.15;letter-spacing:-1px;position:relative;z-index:1}.hero p{font-size:17px;color:#f5e8f1;max-width:580px;margin:0;position:relative;z-index:1}.info-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:15px}.info-row span{font-size:13px;background:#ffffff24;border:1px solid #ffffff34;border-radius:100px;padding:4px 12px}
+.quiz{border:1px solid #ebe9ed;background:#fafafb;padding:16px 18px;border-radius:12px;margin:11px 0}.quiz .qprompt{font-size:17px;font-weight:650;margin:0 0 11px}.answers{display:grid;gap:8px}.answer-option{display:flex;gap:11px;align-items:flex-start;background:#fff;border:1px solid #e5e3e7;padding:11px 14px;border-radius:9px;font-size:16px;line-height:1.45;cursor:pointer}.answer-option:has(input:checked){border-color:#ac90a6;background:#f3edf3}.answer-option input{accent-color:#86627f;margin-top:5px;transform:scale(1.16)}.answer-option.is-right{border-color:#67ae8a;background:#eff8f2}.answer-option.is-wrong{border-color:#d88787;background:#fff0f0}.gap-line{margin:10px 0;padding:13px 16px;border:1px solid #ededf0;border-radius:10px;background:#fafafb;font-size:17px;line-height:2.2}.gap-line input{display:inline-block;vertical-align:middle;width:min(230px,45%);height:42px;border:1px solid #d7d3d8;padding:7px 10px;margin:0 5px;background:#fff;border-radius:8px;font-size:17px}.inline-choice{display:inline-block;vertical-align:baseline;max-width:min(260px,95%);min-width:128px;border:1px solid #dbd7dc;background:white;border-radius:8px;padding:6px 9px;height:42px;font-size:16px;margin:2px 4px;color:#28262b}.inline-choice.is-right,.gap-line input.is-right{border-color:#64a981;background:#ecf8f0}.inline-choice.is-wrong,.gap-line input.is-wrong{border-color:#d18a8a;background:#fff1f1}.feedback{font-size:14px;font-weight:650;min-height:19px;margin-top:6px}.feedback.good{color:var(--good)}.feedback.bad{color:var(--bad)}.checkbar{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin:17px 0 2px}.check-btn{border:0;border-radius:10px;background:#302b33;color:#fff;font-size:15px;font-weight:750;padding:12px 19px}.check-btn:hover{background:#534354}.answer-key{font-size:14px;color:var(--good);border-left:3px solid #8ac3a3;padding:7px 12px;background:#f2faf5;margin-top:8px}.free-input{width:100%;border:1px solid #dbd9de;border-radius:10px;min-height:115px;resize:vertical;padding:13px 14px;background:#fff;font-size:17px;line-height:1.65}.free-small{min-height:80px}.free-label{display:block;font-size:17px;font-weight:650;margin:12px 0 8px}.table-wrap{overflow-x:auto;margin:14px 0}.table{border-collapse:collapse;width:100%;font-size:16px}.table th,.table td{border-bottom:1px solid #eceaee;padding:11px 13px;text-align:left;vertical-align:top}.table th{background:#f8f7f8;color:#77727a;font-size:14px;text-transform:uppercase;letter-spacing:.5px}.article{background:white;border:1px solid var(--line);border-radius:14px;overflow:hidden}.article-header{background:#f6f3f6;padding:27px 29px;border-bottom:1px solid var(--line)}.article-header .eyebrow{font-size:12px;letter-spacing:1.2px;color:#96778f;font-weight:800}.article-header h2{font:700 31px/1.16 Georgia,"Times New Roman",serif;margin:8px 0}.article-header p{font-size:15px;color:var(--sub);margin:0}.article-body{padding:27px 29px;font-size:18px;line-height:1.93}.article-body p{margin:0 0 19px}.article-body h3{font-size:15px;color:#90637e;letter-spacing:1.1px;margin:19px 0 8px;font-family:Inter,sans-serif}.article-body h3:first-child{margin-top:0}.article-body p:last-child{margin-bottom:0}.vocab-row{display:flex;align-items:center;gap:12px;border-bottom:1px solid #eee;padding:10px 1px;font-size:16px}.vocab-row:last-child{border:0}.vocab-number{color:#b38aa5;font-size:13px;font-weight:850;width:27px}.vocab-term{font-weight:750;flex:1}.vocab-trans{color:var(--sub);flex:1}.videowrap{aspect-ratio:16/9;background:#1e1e23;border-radius:13px;overflow:hidden;margin:16px 0 9px}.videowrap iframe{width:100%;height:100%;border:0}.video-link{display:inline-block;padding:10px 14px;border-radius:9px;text-decoration:none;border:1px solid #dcd6df;font-size:15px;font-weight:750;margin:6px 0 9px}.twocol-prompt{display:grid;grid-template-columns:1fr 1fr;gap:12px}.speech-bubble{border:1px solid #ece8ed;border-radius:12px;padding:15px 17px;margin:10px 0;background:#fff}.speaker{color:#886881;font-size:13px;font-weight:850;letter-spacing:.7px;margin-bottom:6px}.speech-bubble p{margin:0;font-size:17px}.rule{background:#f9f8fa;border:1px solid #eeebef;border-radius:14px;padding:21px 22px;margin:15px 0}.rule-head{display:flex;gap:11px;align-items:center;margin-bottom:10px}.rule-index{background:#665369;color:#fff;font-size:14px;font-weight:850;border-radius:9px;padding:7px 11px}.rule h3{margin:0;font-size:21px}.rule p{margin:7px 0}.rule-example{background:#fff;padding:12px 14px;border:1px solid #ece6ed;border-radius:9px;margin:9px 0;font-size:17px}.tiny-list{margin:7px 0 15px;padding-left:23px}.tiny-list li{margin:6px 0}.cloze{font-size:18px;line-height:2.65}.cloze p{margin:0 0 17px}.tier-editor{margin:15px 0}.tier-row{display:grid;grid-template-columns:85px minmax(0,1fr);min-height:72px;margin:5px 0;gap:5px}.tier-label{border-radius:9px 0 0 9px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#28252d;font-weight:900;font-size:24px}.tier-label small{font-size:11px;font-weight:700;letter-spacing:.3px}.tier-content{border:1px solid #e9e7ea;border-radius:0 9px 9px 0;background:#faf9fa;padding:9px;display:flex;flex-wrap:wrap;align-items:center;gap:7px}.rank-chip{border:1px solid #d9d5db;background:white;border-radius:8px;padding:8px 10px;font-size:14px;font-weight:650}.rank-chip button{border:0;background:transparent;color:#bd5b68;font-size:16px;margin-left:7px;padding:0}.rank-inputs{display:flex;gap:8px;margin-top:14px}.rank-inputs input{flex:1;min-width:0;border:1px solid #d7d2d8;padding:10px 12px;border-radius:9px}.rank-inputs select{border:1px solid #d7d2d8;border-radius:9px;padding:10px}.rank-inputs button{border:0;background:#302b33;color:white;border-radius:9px;padding:10px 14px;font-weight:750}.homework-card{border:1px solid var(--line);border-radius:12px;padding:17px 18px;margin:11px 0}.homework-card strong{font-size:18px}.footer-nav{display:flex;align-items:center;justify-content:space-between;gap:13px;margin-top:23px}.nav-button{border:1px solid #dedbe0;background:#fff;border-radius:11px;padding:13px 18px;color:#332e35;font-size:15px;font-weight:750}.nav-button.primary{background:#2d2930;color:#fff;border-color:#2d2930}.nav-button:hover:not(:disabled){filter:brightness(.96)}.count{font-size:14px;color:var(--muted)}.hidden{display:none!important}.modal-backdrop{position:fixed;inset:0;background:#18141aab;display:grid;place-items:center;padding:20px;z-index:100}.modal{width:min(450px,100%);border-radius:18px;background:#fff;padding:26px}.modal h2{font-size:25px;margin:0 0 8px}.modal p{font-size:16px;color:var(--sub)}.modal-actions{display:flex;gap:9px;justify-content:flex-end}.teacher-note{color:#605966;background:#f8f6f8;border:1px solid #ece5ea;border-radius:11px;padding:14px 16px;font-size:15px}
+@media(max-width:1100px){.rail{width:225px;flex-basis:225px}.reading{padding:27px 26px}.surface{padding:26px}.topbar{padding:0 25px}}@media(max-width:760px){.rail{position:fixed;left:0;transform:translateX(-106%);transition:transform .2s ease;width:290px;max-width:85vw;box-shadow:14px 0 35px #0001}.rail.open{transform:translateX(0)}.mobile-menu{display:inline-flex}.topbar{height:62px;padding:0 15px}.save-pill{display:none}.reading{padding:22px 13px 30px}.surface{padding:20px 17px}.page-title{font-size:32px}.grid3,.grid2,.twocol-prompt{grid-template-columns:1fr}.article-body{padding:20px;font-size:17px}.article-header{padding:21px}.article-header h2{font-size:27px}.tier-row{grid-template-columns:65px minmax(0,1fr)}.rule{padding:17px}.rank-inputs{flex-wrap:wrap}.rank-inputs input{flex-basis:100%}.vocab-row{flex-wrap:wrap}.vocab-trans{flex-basis:100%;padding-left:39px}.footer-nav{gap:5px}.nav-button{padding:11px 12px;font-size:14px}.top-kicker{font-size:11px}}
+@media(max-width:440px){.answer-option{font-size:15px}.gap-line{font-size:16px}.gap-line input{width:52%;font-size:16px}.inline-choice{font-size:15px}.hero{padding:23px}.hero h2{font-size:28px}.teacher-note{font-size:14px}.count{font-size:12px}}
+
+/* Student-only redesign based on the provided reference: no chrome, no teacher UI. */
+:root{--bg:#fafafa;--surface:#fff;--ink:#25252a;--sub:#65656e;--muted:#919198;--line:#ececef;--soft:#f8f8f9;--accent:#635464;--accent-light:#f1eef1;--shadow:none}
+body{font-size:18px;line-height:1.7;background:var(--bg)}
+.rail{width:236px;flex-basis:236px;background:#fff;border-right:1px solid #ededf0}
+.brand{margin:0;padding:24px 18px 25px;gap:10px}
+.brand-mark{width:38px;height:38px;min-width:38px;border-radius:10px;font-size:12px;letter-spacing:-1px;background:#26252b;position:relative}
+.brand-mark span{font-size:10px;position:absolute;right:-4px;bottom:-7px;letter-spacing:0}
+.brand-title{font-size:14px;letter-spacing:.15px;line-height:1.35;font-weight:850}
+.brand-sub,.rail-rule,.rail-foot,.nav-section,.top-kicker,.top-actions,.save-pill,.progress-outer,.kicker,.page-desc{display:none!important}
+.nav-list{padding:0 9px 20px}
+.nav-link{font-size:15px;line-height:1.38;padding:11px 12px;gap:10px;margin:0 1px 3px;width:calc(100% - 2px);border-radius:9px;color:#606068}
+.nav-link.active{background:#f0ecf0;color:#29252b;font-weight:750}
+.nav-link:hover{background:#f5f3f5}
+.nav-no{min-width:29px;width:29px;height:29px;border-radius:8px;background:#f0eff1;color:#89878e;font-size:12px}
+.nav-link.active .nav-no{background:#69586a;color:#fff}
+.topbar{height:22px;background:#fff;border-bottom:1px solid #f1f1f2;padding:0 22px}
+.reading{max-width:1015px;padding:27px 37px 48px}
+.page-title{font-size:clamp(30px,3.4vw,40px);line-height:1.18;letter-spacing:-1.25px;margin:0 0 24px;font-weight:820}
+.surface{background:#fff;border:1px solid #ededf0;box-shadow:none;border-radius:16px;padding:30px 33px}
+.section{margin:0 0 30px}
+.section-kicker{font-size:16px;color:#816679;letter-spacing:-.1px;text-transform:none;font-weight:800;margin:0 0 12px}
+.section h2{font-size:24px}.section h3{font-size:21px}
+.lead{font-size:19px;color:#4b4850}
+.card,.quiz,.soft,.speech-bubble,.rule,.gap-line,.homework-card{border-color:#ececef;background:#fafafb;box-shadow:none}
+.quiz{padding:15px 17px}
+.quiz .qprompt{font-size:18px}
+.answer-option{font-size:17px;padding:12px 14px}
+.gap-line{font-size:18px;line-height:2.35}
+.gap-line input,.inline-choice{font-size:17px;height:44px}
+.free-label{font-size:17px}.free-input{font-size:18px}
+.table{font-size:17px}.table th{font-size:14px}
+.article-body{font-size:19px;line-height:1.88}
+.article-header{background:#faf9fa}
+.article-header h2{font-size:31px}
+.vocab-row{font-size:17px}
+.rule{background:#f9f9fa}.rule h3{font-size:21px}.rule-example{font-size:18px}
+.check-btn,.nav-button{font-size:16px}
+.check-btn,.nav-button.primary{background:#2a292f;color:#fff;border-color:#2a292f}
+.teacher-note,.answer-key,.hero,.info-row,.bignum{display:none!important}
+.footer-nav{margin-top:23px}
+@media(max-width:1100px){.rail{width:215px;flex-basis:215px}.reading{padding:24px 25px 40px}.surface{padding:24px}}
+@media(max-width:760px){.rail{width:285px;max-width:85vw}.topbar{height:58px;padding:0 16px;justify-content:flex-start}.mobile-menu{display:inline-flex;border:none;background:transparent;padding:8px 9px;font-size:15px}.reading{padding:23px 14px 38px}.surface{padding:18px 16px}.page-title{font-size:30px;margin-bottom:18px}.nav-link{font-size:16px}.article-body{font-size:18px;padding:20px}.section-kicker{font-size:16px}}
+@media(max-width:440px){.page-title{font-size:29px}.surface{padding:16px 13px}.article-header{padding:20px}.article-header h2{font-size:26px}.gap-line input{width:49%}.rank-inputs input{flex-basis:100%}.answer-option{font-size:16px}}
+</style>
+<style>
+/* Lesson 4: same interface, slightly larger type */
+body{font-size:19px}
+.nav-link{font-size:16px}
+.page-title{font-size:clamp(32px,3.5vw,42px)}
+.section-kicker{font-size:17px}
+.lead{font-size:20px}
+.quiz .qprompt{font-size:19px}
+.answer-option{font-size:18px;line-height:1.5}
+.card p,.speech-bubble p{font-size:18px}
+.gap-line{font-size:19px}
+.gap-line input,.inline-choice{font-size:18px}
+.free-label{font-size:18px}.free-input{font-size:19px}
+.table{font-size:18px}.table th{font-size:15px}
+.article-body{font-size:20px;line-height:1.9}
+.rule p,.rule-example{font-size:18px}
+.small{font-size:16px}.micro{font-size:14px}
+.visual-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px;margin:16px 0 22px}
+.visual-grid.four{grid-template-columns:repeat(4,minmax(0,1fr))}
+.visual-grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.visual-card{overflow:hidden;border:1px solid var(--line);border-radius:13px;background:#fff}
+.visual-card img{width:100%;height:155px;object-fit:cover;display:block;background:#f1f1f2}
+.visual-card.compact img{height:135px}
+.visual-caption{padding:12px 13px;font-size:16px;line-height:1.35}
+.visual-caption b{display:block;font-size:17px}
+.visual-caption span{display:block;color:var(--muted);font-size:14px;margin-top:4px}
+.discussion-box{border-left:3px solid #9a7f96;background:#faf8fa;padding:14px 17px;margin:13px 0;border-radius:0 11px 11px 0}
+.discussion-box p{margin:7px 0;font-size:18px}
+.question-stack{background:#fafafb;border:1px solid #ececef;border-radius:12px;padding:15px 18px;margin:12px 0}
+.question-stack p{margin:8px 0;font-size:18px}
+.video-poster{border-radius:13px;overflow:hidden;margin:13px 0 17px;background:#eee}
+.video-poster img{width:100%;display:block;aspect-ratio:16/9;object-fit:cover}
+.wrongline{border-color:#efd7d7;background:#fff9f9}
+.final-grid .soft{min-height:126px}
+.table .free-label{display:none}.table .free-input{min-height:58px;padding:9px 10px;margin:0}
+@media(max-width:900px){.visual-grid.four{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:760px){body{font-size:18px}.visual-grid,.visual-grid.three{grid-template-columns:repeat(2,minmax(0,1fr))}.visual-card img{height:145px}.answer-option{font-size:17px}.article-body{font-size:19px}.discussion-box p,.question-stack p{font-size:17px}}
+@media(max-width:440px){.visual-grid,.visual-grid.three,.visual-grid.four{grid-template-columns:1fr 1fr}.visual-card img,.visual-card.compact img{height:120px}.visual-caption{padding:9px;font-size:14px}.visual-caption b{font-size:15px}.visual-caption span{font-size:12px}}
+</style>
+</head>
+<body>
+<div id="app"><aside class="rail" id="rail"><div class="brand"><div class="brand-mark">NG<span>✳</span></div><div><div class="brand-title">WORTH THE HYPE?</div></div></div><nav class="nav-list" id="nav"></nav></aside><main class="main"><header class="topbar"><div><button id="menu" class="ghost-btn mobile-menu" aria-label="Open menu">☰</button> </div></header><div class="reading"><div id="pageIntro"></div><article id="content"></article><div class="footer-nav"><button id="prev" class="nav-button">← Back</button><span class="count" id="counter"></span><button id="next" class="nav-button primary">Next page →</button></div></div></main></div>
+<script>
+'use strict';
+const STORAGE='new-general-masha-lesson-4-worth-the-hype-v1';
+const empty=()=>({answers:{},visited:{},checked:{},tierItems:[],page:0,finished:false});
+let state=empty();try{state={...state,...JSON.parse(localStorage.getItem(STORAGE)||'{}')}}catch(e){}
+const save=()=>{try{localStorage.setItem(STORAGE,JSON.stringify(state))}catch(e){}};
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const norm=s=>String(s??'').toLowerCase().trim().replace(/[“”‘’]/g,"'").replace(/[^a-z0-9' -]/g,' ').replace(/\s+/g,' ');
+const keys={};const pages=[];let page=state.page||0;
+function add(title,kind,mins,html,group){pages.push({title,kind,mins,html,group})}
+function section(title,html){return `<section class="section"><div class="section-kicker">${title}</div>${html}</section>`}
+function prompt(txt){return `<p class="lead">${txt}</p>`}
+function note(txt){return ''}
+function open(id,label,placeholder='Write your answer...',rows=2){let v=state.answers[id]||'';return `<label class="free-label" for="${id}">${label}</label><textarea class="free-input ${rows===1?'free-small':''}" rows="${rows}" id="${id}" data-input="${id}" placeholder="${esc(placeholder)}">${esc(v)}</textarea>`}
+function radio(id,q,opts,correct,explanation=''){keys[id]={type:'radio',correct,explanation};return `<div class="quiz" data-quiz="${id}"><p class="qprompt">${q}</p><div class="answers">${opts.map((o,i)=>`<label class="answer-option"><input type="radio" name="${id}" value="${i}" data-radio="${id}" ${String(state.answers[id])===String(i)?'checked':''}><span>${o}</span></label>`).join('')}</div><div class="feedback" data-feedback="${id}"></div></div>`}
+function gap(id,before,after,ans){keys[id]={type:'gap',correct:ans};const value=state.answers[id]||'';return `<div class="gap-line" data-quiz="${id}">${before} <input type="text" aria-label="Complete the sentence" data-input="${id}" value="${esc(value)}" autocomplete="off" placeholder="..."> ${after}<div class="feedback" data-feedback="${id}"></div></div>`}
+function choice(id,opts,correct){keys[id]={type:'choice',correct};let value=state.answers[id]??'';return `<select aria-label="Choose the correct form" data-choice="${id}" class="inline-choice" data-quiz="${id}"><option value="">Choose...</option>${opts.map((o,i)=>`<option value="${i}" ${String(value)===String(i)?'selected':''}>${esc(o)}</option>`).join('')}</select>`}
+function checkbar(label='Check answers'){return `<div class="checkbar"><span class="feedback" data-page-result></span><button type="button" class="check-btn" data-checkpage>${label}</button></div>`}
+function qsection(title,body){return section(title,body+checkbar())}
+function ruleTitle(n,title){return `<div class="rule-head"><span class="rule-index">RULE ${n}</span><h3>${title}</h3></div>`}
+const vocab=[['top-tier','первоклассный'],['overrated','переоценённый'],['underrated','недооценённый'],['iconic','культовый, легендарный'],['mid','посредственный (сленг)'],['live up to the hype','оправдать ажиотаж / ожидания'],['fall flat','не произвести ожидаемого впечатления'],['a letdown','разочарование'],['stand out','выделяться'],['have a soft spot for','питать слабость к'],['a guilty pleasure','любимое занятие, в котором немного неловко признаться'],['hit-or-miss','непредсказуемый по качеству'],['be worth it','стоить того'],['be on another level','быть на совершенно другом уровне']];
+// ───────────────────────────────── PAGES ─────────────────────────────────
+add('The Hype Wall','Visual warm-up',4,
+section('Look first. Judge fast.',prompt('Which of these are actually worth the attention they get?')+`
+<div class="visual-grid hype-grid">
+  <div class="visual-card"><img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=900&q=82" alt="Designer handbag"><div class="visual-caption"><b>Designer bag</b><span>expensive · recognizable · everywhere</span></div></div>
+  <div class="visual-card"><img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=900&q=82" alt="Viral beauty product"><div class="visual-caption"><b>Viral beauty product</b><span>reviews · routines · sold out</span></div></div>
+  <div class="visual-card"><img src="https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=900&q=82" alt="Music festival"><div class="visual-caption"><b>Huge festival</b><span>crowds · outfits · expensive tickets</span></div></div>
+  <div class="visual-card"><img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=900&q=82" alt="Cinema and popular series"><div class="visual-caption"><b>Massive TV / film release</b><span>edits · spoilers · everybody talking</span></div></div>
+  <div class="visual-card"><img src="https://images.unsplash.com/photo-1547592180-85f173990554?w=900&q=82" alt="Viral food"><div class="visual-caption"><b>Viral food</b><span>queues · reviews · one perfect shot</span></div></div>
+  <div class="visual-card"><img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=900&q=82" alt="Fashion trend"><div class="visual-caption"><b>Fashion trend</b><span>every feed · one season · then gone?</span></div></div>
+</div>`)+
+section('Your verdict',radio('wall1','Which category is easiest to convince you to spend money on?',['Fashion','Beauty','Food','Entertainment'],null)+radio('wall2','If all six kept popping up on your feed, which would you probably scroll past first?',['Designer bag','Beauty product','Festival','Viral food'],null)+`<div class="discussion-box"><b>Discuss</b><p>What is one thing people around you love that you genuinely do not understand?</p><p>Does seeing the same product again and again make you more curious — or more annoyed?</p><p>What are you <b>currently seeing everywhere</b> online?</p></div>`),'Warm-up');
+
+add('Overrated or Underrated?','Visual opinion task',4,
+section('Put them on your scale',prompt('For each one, choose the reaction closest to your opinion. Explain at least two choices.')+`
+<div class="visual-grid four">
+ <div class="visual-card compact"><img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=800&q=82" alt="Popular films"><div class="visual-caption"><b>Big franchise films</b></div></div>
+ <div class="visual-card compact"><img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=800&q=82" alt="Fashion collaborations"><div class="visual-caption"><b>Fashion collaborations</b></div></div>
+ <div class="visual-card compact"><img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=800&q=82" alt="Celebrity beauty brands"><div class="visual-caption"><b>Celebrity beauty brands</b></div></div>
+ <div class="visual-card compact"><img src="https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=800&q=82" alt="Music festivals"><div class="visual-caption"><b>Huge music festivals</b></div></div>
+</div>`+
+radio('scale1','Big franchise films',['Underrated','Fairly rated','Overrated'],null)+
+radio('scale2','Fashion collaborations',['Overrated','Underrated','Fairly rated'],null)+
+radio('scale3','Celebrity beauty brands',['Fairly rated','Overrated','Underrated'],null)+
+radio('scale4','Huge music festivals',['Underrated','Overrated','Fairly rated'],null))+
+section('Take a position',`<div class="discussion-box"><p><b>“Something can be overrated and still be good.”</b> Agree?</p><p><b>“If millions of people love something, there is probably a reason.”</b> Agree?</p><p>Have you ever disliked something simply because it was <b>too popular</b>?</p></div>`),'Warm-up');
+
+add('Hype Language','Vocabulary',3,
+qsection('Match the meaning',prompt('Choose the closest meaning. The options are deliberately mixed.')+
+radio('hv1','1. <b>live up to the hype</b>',['become popular very quickly','cost more than expected','be as good as people said it would be','make people argue online'],2)+
+radio('hv2','2. <b>give something a try</b>',['try it to see whether you like it','recommend it to everybody','buy it before it sells out','stop being interested in it'],0)+
+radio('hv3','3. <b>miss out on</b>',['spend too much on something','become obsessed with something','regret buying something','lose the chance to experience something'],3)+
+radio('hv4','4. <b>get into something</b>',['see it repeatedly online','gradually become interested in it','decide it is overrated','try it only once'],1)+
+radio('hv5','5. <b>worth it</b>',['popular enough to trend','good enough to justify the money, time or effort','better than everything else','cheap enough to buy immediately'],1))+
+qsection('Choose the expression',prompt('Pick the phrase that completes the idea most naturally.')+
+radio('hvc1','Everyone recommended the restaurant, but it really didn’t ______.',['miss out on','get into it','live up to the hype','give it a try'],2)+
+radio('hvc2','I wasn’t interested in Tame Impala at first, but I slowly ______ their music.',['got into','missed out on','lived up to','gave a try'],0)+
+radio('hvc3','€150 for that? I really don’t think it’s ______.',['underrated','missing out','got into','worth it'],3)),'Vocabulary');
+
+add('Have You Actually Done It?','Visual speaking',3,
+section('Experience board',prompt('Choose your answer for each experience. Then explain the most interesting one.')+`
+<div class="visual-grid three">
+ <div class="visual-card compact"><img src="https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=800&q=82" alt="Large concert"><div class="visual-caption"><b>Huge concert</b></div></div>
+ <div class="visual-card compact"><img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&q=82" alt="Solo travel"><div class="visual-caption"><b>Solo trip</b></div></div>
+ <div class="visual-card compact"><img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&q=82" alt="Fashion event"><div class="visual-caption"><b>Fashion event</b></div></div>
+ <div class="visual-card compact"><img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=800&q=82" alt="Hair and beauty change"><div class="visual-caption"><b>Dramatic look change</b></div></div>
+ <div class="visual-card compact"><img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=800&q=82" alt="Midnight film premiere"><div class="visual-caption"><b>Midnight premiere</b></div></div>
+ <div class="visual-card compact"><img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=800&q=82" alt="Designer purchase"><div class="visual-caption"><b>Designer purchase</b></div></div>
+</div>`+
+radio('exp1','Huge concert',['Done it','Would try','Not for me'],null)+
+radio('exp2','Solo trip',['Not for me','Done it','Would try'],null)+
+radio('exp3','Fashion event',['Would try','Not for me','Done it'],null)+
+radio('exp4','Dramatic look change',['Done it','Not for me','Would try'],null))+
+section('Talk',`<div class="discussion-box"><p>Have you ever spent more money than you planned because you didn’t want to <b>miss out</b>?</p><p>Have you ever tried something you expected to hate?</p><p>What have you been completely <b>late to the party</b> with?</p></div>`),'Speaking');
+
+add('Before You Watch','Video prediction',2,
+section('Never Have I Ever',`<div class="video-poster"><img src="https://img.youtube.com/vi/Jl_93OH8fVs/hqdefault.jpg" alt="The Greatest Showman cast Never Have I Ever"></div>`+
+prompt('Zendaya, Zac Efron, Hugh Jackman and Keala Settle play Never Have I Ever. Predict the group dynamic before watching.')+
+radio('pred1','Who do you expect to give the longest explanations?',['Zendaya','Zac Efron','Hugh Jackman','Keala Settle'],null)+
+radio('pred2','Who do you expect to reveal something most unexpected?',['Keala Settle','Hugh Jackman','Zendaya','Zac Efron'],null))+
+section('Make one question',open('pred-open','Write one Never Have I Ever question you would ask this group.','Never have I ever...',1)),'Video');
+
+add('Never Have I Ever','Video · first watch',4,
+section('Watch · 0:00–4:00',`<div class="videowrap"><iframe src="https://www.youtube-nocookie.com/embed/Jl_93OH8fVs?start=0&end=240&rel=0" title="Never Have I Ever with Hugh Jackman, Zac Efron, Zendaya and Keala Settle" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><a class="video-link" href="https://www.youtube.com/watch?v=Jl_93OH8fVs" target="_blank" rel="noopener noreferrer">↗ Open full video on YouTube</a>`)+
+qsection('First watch · Gist',prompt('Watch without stopping. Choose the best answer.')+
+radio('vidgist','What mainly makes the clip entertaining?',['The actors are competing for a prize.','The interviewer keeps correcting their grammar.','The cast tries to remember facts from the film.','Their answers and reactions reveal unexpected things about them.'],3)+
+radio('vidformat','What is the game mainly about?',['Predicting future plans','Things people have or have not experienced','Comparing the cast’s acting skills','Remembering exact dates from the past'],1))+
+section('One reaction',open('vid-reaction','Which person or moment stood out to you most? Why?','The most memorable moment was...',2)),'Video');
+
+add('Watch Again','Video · detail',4,
+section('Second watch',prompt('Watch again. This time, pay attention to how people answer and what happens after “I have.”')+
+`<div class="table-wrap"><table class="table"><tr><th>Person</th><th>One answer / reaction you noticed</th></tr>
+<tr><td>Zendaya</td><td>${open('vzend','','Write a short note...',1)}</td></tr>
+<tr><td>Zac Efron</td><td>${open('vzac','','Write a short note...',1)}</td></tr>
+<tr><td>Hugh Jackman</td><td>${open('vhugh','','Write a short note...',1)}</td></tr>
+<tr><td>Keala Settle</td><td>${open('vkeala','','Write a short note...',1)}</td></tr></table></div>`)+
+qsection('Notice the format',radio('vidnotice','Which sentence best describes what often happens in the game?',['People describe habits they do every week.','People first say whether something has ever happened, then sometimes explain a specific past story.','People only answer with exact dates.','People mainly describe what they are doing right now.'],1))+
+section('Discuss',`<div class="discussion-box"><p>Which answer surprised you most?</p><p>Who seems easiest to play this game with?</p><p>What question would probably make <b>you</b> hesitate before answering?</p></div>`),'Video');
+
+add('Your Turn · Never Have I Ever','Speaking',4,
+section('Answer. Then tell the story.',prompt('Answer the questions. If the answer is yes, explain when and what happened.')+
+`<div class="question-stack">
+<p>1. Have you ever bought something because it kept <b>popping up on your feed</b>?</p>
+<p>2. Have you ever <b>come across</b> an artist online and then got really into them?</p>
+<p>3. Have you ever saved something <b>for later</b> and actually bought it?</p>
+<p>4. Have you ever spent too much money on something that wasn’t <b>worth it</b>?</p>
+<p>5. Have you ever watched something you thought was <b>overrated</b> and completely changed your mind?</p>
+<p>6. Have you ever tried a trend only because everyone else was doing it?</p>
+</div>`)+
+section('Follow-up questions',`<div class="soft"><p><b>When?</b> · What happened? · Who were you with?</p><p>What <b>were you doing</b> when you first discovered it?</p><p>Did it eventually <b>live up to the hype</b>?</p></div>`+
+open('never-notes','Optional notes','One story I want to tell...',2)),'Speaking');
+
+add('Grammar Detective','Noticing',3,
+qsection('Experience or finished event?',prompt('Choose what each sentence is doing.')+
+radio('gd1','“Have you ever bought something because of TikTok?”',['Specific finished event','Life experience'],1)+
+radio('gd2','“I bought a lip product last summer.”',['Life experience','Specific finished event'],1)+
+radio('gd3','“Masha has never been to Fashion Week.”',['Life experience','Specific finished event'],0)+
+radio('gd4','“Kristina and I watched it on Saturday.”',['Life experience','Specific finished event'],1)+
+radio('gd5','“I’ve seen that film five times.”',['Specific finished event','Life experience'],1)+
+radio('gd6','“I came across that account while I was scrolling last night.”',['Specific finished event','Life experience'],0))+
+qsection('Choose the rule',radio('gdrule','Present Perfect is normally used here when...',['we know exactly when something happened','an action was in progress at one past moment','the experience matters but no finished past time is given','we describe a regular habit'],2)),'Grammar');
+
+add('Present Perfect','Grammar',5,
+section('The core idea',`<div class="rule">${ruleTitle(1,'Has this happened before now?')}<p>Use <b>Present Perfect</b> for life experience when the exact finished time is not important or is not given.</p><div class="rule-example">“I <b>have tried</b> it.” · “She <b>has seen</b> that film.” · “We <b>haven’t been</b> there.”</div><p><b>Form:</b> have / has + <b>V3</b> (past participle)</p></div>
+<div class="rule">${ruleTitle(2,'ever / never')}<p><b>ever</b> asks about any time before now. <b>never</b> means “not at any time before now.”</p><div class="rule-example">“Have you <b>ever bought</b> something because of TikTok?”<br>“I’ve <b>never understood</b> the hype around that brand.”</div></div>
+<div class="rule">${ruleTitle(3,'Switch to Past Simple for the story')}<p>When the conversation moves to <b>when, where or what exactly happened</b>, use Past Simple.</p><div class="rule-example"><b>Have you ever been</b> to Italy?<br>— Yes, I have.<br><b>When did you go?</b><br>— I <b>went</b> in 2024.</div><p>Finished past time → Past Simple.</p><div class="rule-example wrongline">✕ I’ve bought it yesterday.<br>✓ I <b>bought</b> it yesterday.</div></div>`)+
+section('Useful V3 forms',`<div class="table-wrap"><table class="table"><tr><th>Verb</th><th>Past Simple</th><th>V3</th></tr><tr><td>go</td><td>went</td><td><b>gone</b></td></tr><tr><td>see</td><td>saw</td><td><b>seen</b></td></tr><tr><td>buy</td><td>bought</td><td><b>bought</b></td></tr><tr><td>take</td><td>took</td><td><b>taken</b></td></tr><tr><td>do</td><td>did</td><td><b>done</b></td></tr><tr><td>be</td><td>was / were</td><td><b>been</b></td></tr></table></div>`)+
+qsection('Quick check',radio('ppquick1','Which is correct?',['I’ve seen it last Friday.','I saw it last Friday.','I have saw it last Friday.','I was seen it last Friday.'],1)+radio('ppquick2','Which is correct?',['Have you ever went there?','Did you ever been there?','Have you ever been there?','Have you been there yesterday?'],2)),'Grammar');
+
+add('Experience Check','Grammar in context',5,
+qsection('Choose carefully',prompt('Choose the best option. Some distractors use forms you have seen before, but they do not fit this context.')+
+radio('ec1','1. I ______ that brand before, but I ______ anything from them.',['saw / haven’t bought','have seen / didn’t buy','was seeing / haven’t bought','have seen / haven’t bought'],3)+
+radio('ec2','2. Have you ever ______ something just because an influencer recommended it?',['buy','bought','buying','did buy'],1)+
+radio('ec3','3. I ______ this restaurant on TikTok last month and ______ it for later.',['came across / saved','have come across / have saved','was coming across / saved','came across / have saved'],0)+
+radio('ec4','4. Kristina ______ that series yet, but she ______ three episodes yesterday.',['didn’t finish / has watched','hasn’t finished / has watched','hasn’t finished / watched','hasn’t finish / watched'],2)+
+radio('ec5','5. I ______ never really ______ celebrity perfumes.',['did / get into','was / getting into','have / got','have / been into'],3)+
+radio('ec6','6. While I ______ through TikTok last night, I ______ that bag again.',['scrolled / have seen','was scrolling / saw','have scrolled / saw','was scroll / seen'],1)+
+radio('ec7','7. We ______ a few viral places this year, but the café we ______ in May was still the best.',['have tried / visited','tried / have visited','have try / visited','were trying / have visited'],0)),'Grammar');
+
+add('Just, Already or Yet?','Grammar · chat',3,
+section('Masha & Kristina',`<div class="speech-bubble"><div class="speaker">KRISTINA</div><p>Have you watched the new episode ${choice('jay1',['already','just','yet','ever'],2)}?</p></div>
+<div class="speech-bubble"><div class="speaker">MASHA</div><p>No 😭 I’ve ${choice('jay2',['yet','already','never','just'],1)} seen about twenty edits though.</p></div>
+<div class="speech-bubble"><div class="speaker">KRISTINA</div><p>I’ve ${choice('jay3',['just','yet','ever','already'],0)} finished the whole season.</p></div>
+<div class="speech-bubble"><div class="speaker">MASHA</div><p>It came out yesterday.</p></div>
+<div class="speech-bubble"><div class="speaker">KRISTINA</div><p>Exactly.</p></div>`+checkbar())+
+section('Meaning',`<div class="grid3"><div class="soft"><b>already</b><p>earlier than expected / before now</p></div><div class="soft"><b>just</b><p>very recently</p></div><div class="soft"><b>yet</b><p>up to now; common in questions and negatives</p></div></div>`)+
+qsection('Quick check',radio('jay4','“I’ve ______ ordered it” = it happened very recently.',['yet','ever','just','never'],2)+radio('jay5','“I haven’t watched it ______” = it hasn’t happened up to now.',['yet','already','ever','just'],0)),'Grammar');
+
+add('The Viral Purchase','Reading',4,
+section('Read',`<div class="article"><div class="article-header"><div class="eyebrow">SOCIAL MEDIA / CULTURE</div><h2>The Lip Oil I Couldn’t Escape</h2><p>One month, one algorithm, one unnecessary purchase.</p></div><div class="article-body"><p>For nearly a month, the same lip oil kept <b>popping up on Nina’s feed</b>. At first, she always <b>scrolled past</b> the videos. She already had <b>a lot of</b> makeup and didn’t need <b>any</b> more.</p><p>Then, while she <b>was scrolling through</b> TikTok one evening, she <b>came across</b> a review from a creator she actually trusted. The creator said she had used the product for months and that it genuinely <b>lived up to the hype</b>. Nina <b>saved the video for later</b>.</p><p>A few days later, almost everyone at work was suddenly talking about the same product. Nina usually tries not to buy things just because they are trending, but this time she didn’t want to <b>miss out</b>. She eventually <b>ended up ordering</b> it.</p><p>She has <b>used it a few times</b> now. The packaging looks great and the colour is nice, but the product itself isn’t very different from one she already owned. She also realised she had spent much more than she normally would on a lip product.</p><p>“I’ve definitely bought worse things,” she says, “but I still <b>don’t get the hype</b>. I probably wouldn’t buy it again.”</p></div></div>`)+
+qsection('Read between the lines',radio('readh1','What changed Nina’s mind most?',['The packaging looked expensive.','TikTok offered her a discount.','A creator she trusted gave it a positive review.','Her colleagues bought it for her.'],2)+radio('readh2','Which best describes her final opinion?',['She regrets the purchase completely.','It is fine, but it does not deserve the attention it gets.','It exceeded her expectations.','She has not decided yet.'],1)+radio('readh3','Why is “was scrolling” used in paragraph 2?',['It describes a regular habit.','It shows a completed event after another completed event.','It describes something happening now.','It gives the background action when another event happened.'],3))+
+section('Discuss',`<div class="discussion-box"><p>Did Nina buy it because she wanted it — or because she kept seeing it?</p><p>At what point does repeated advertising become annoying rather than effective?</p><p>For social media work, is it better for a product to appear everywhere for one week or consistently for several months?</p></div>`),'Reading');
+
+add('Hot Takes','Discussion',3,
+section('Pick a side',prompt('Choose a reaction, then defend it. Examples matter more than “yes/no.”')+
+radio('take1','“If you need influencers to convince people that a product is good, the product probably isn’t that good.”',['Agree','It depends','Disagree'],null)+
+radio('take2','“Buying something expensive can be worth it even when a cheaper version does almost the same thing.”',['Disagree','Agree','It depends'],null)+
+radio('take3','“TikTok has made people more interested in trying new things, but also more afraid of missing out.”',['It depends','Disagree','Agree'],null)+
+radio('take4','“Something can be massively overrated and still be genuinely good.”',['Agree','Disagree','It depends'],null))+
+section('Push the answer further',`<div class="discussion-box"><p><b>Give an example.</b></p><p>What would change your mind?</p><p>Has this ever happened to you personally?</p><p>Does working with social media make you <b>more</b> or <b>less</b> likely to trust hype?</p></div>`),'Discussion');
+
+add('Masha’s Hype Report','Final speaking',4,
+section('Choose four real examples',`<div class="grid2 final-grid">
+<div class="soft"><span class="chip">WORTH THE HYPE</span><p>Something you’ve tried, watched or bought and genuinely recommend.</p></div>
+<div class="soft"><span class="chip">OVERRATED</span><p>Something you’ve experienced but would not recommend.</p></div>
+<div class="soft"><span class="chip">LATE TO THE PARTY</span><p>Something you’ve only recently got into.</p></div>
+<div class="soft"><span class="chip">STILL HAVEN’T TRIED</span><p>Something popular you haven’t tried yet.</p></div>
+</div>`)+
+section('Defend your choices',`<div class="question-stack"><p>How did you first <b>come across</b> it?</p><p>Have you tried / seen / bought it?</p><p>When did that happen?</p><p>Did it <b>live up to the hype</b>?</p><p>Would you recommend it to Kristina?</p><p>Was it <b>worth it</b>?</p></div>`+
+`<div class="soft"><b>Use naturally</b><p>Present Perfect · Past Simple · one Past Continuous sentence · 3 expressions from today · 2 expressions from earlier lessons</p></div>`+
+open('final-hype','Optional speaking notes','Worth the hype: ...\nOverrated: ...\nLate to the party: ...\nStill haven’t tried: ...',4)),'Final speaking');
+
+// ───────────────────────────────── ENGINE ─────────────────────────────────
+function idsInCurrentPage(){const box=document.getElementById('content');return [...new Set([...box.querySelectorAll('[data-quiz]')].map(e=>e.dataset.quiz))].filter(x=>keys[x]?.correct!==null&&keys[x]?.correct!==undefined)}
+function evaluate(id){const q=keys[id];if(!q||q.correct===null||q.correct===undefined)return null;const a=state.answers[id];if(a===undefined||a==='')return null;return q.type==='gap' ? (Array.isArray(q.correct)?q.correct:[q.correct]).some(v=>norm(a)===norm(v)) : String(a)===String(q.correct)}
+function paint(){
+ const root=document.getElementById('content');
+ for(const id of idsInCurrentPage()){
+  const q=keys[id],correct=evaluate(id),marked=!!state.checked[id];
+  const wrapper=root.querySelector(`[data-quiz="${id}"]`),feedback=root.querySelector(`[data-feedback="${id}"]`);
+  if(!wrapper)continue;
+  wrapper.querySelectorAll('.answer-option').forEach((option,i)=>{
+   option.classList.toggle('is-right',marked&&i===q.correct&&correct!==null);
+   option.classList.toggle('is-wrong',marked&&option.querySelector('input')?.checked&&i!==q.correct);
+  });
+  if(wrapper.matches('select,input')){
+   wrapper.classList.toggle('is-right',marked&&correct===true);
+   wrapper.classList.toggle('is-wrong',marked&&correct===false);
+  }else{
+   const field=wrapper.querySelector('input[type=text]');
+   if(field){field.classList.toggle('is-right',marked&&correct===true);field.classList.toggle('is-wrong',marked&&correct===false)}
+  }
+  if(feedback){
+   feedback.className='feedback';
+   feedback.textContent='';
+   if(marked&&correct!==null){feedback.classList.add(correct?'good':'bad');feedback.textContent=correct?'✓ Correct!':'Try again.'}
+  }
+ }
+}
+function checkPage(){const ids=idsInCurrentPage();let attempted=0,correct=0;for(const id of ids){const result=evaluate(id);if(result!==null){attempted++;state.checked[id]=true;if(result)correct++}}save();paint();const node=document.querySelector('[data-page-result]');if(node)node.textContent=`${correct} correct out of ${attempted} answered · ${ids.length} questions`}
+function renderNav(){const nav=document.getElementById('nav');nav.innerHTML=pages.map((p,i)=>`<button type="button" data-page="${i}" class="nav-link ${i===page?'active':''} ${state.visited[i]?'done':''}"><span class="nav-no">${String(i+1).padStart(2,'0')}</span><span class="nav-title">${esc(p.title)}</span></button>`).join('');nav.querySelector('.active')?.scrollIntoView({block:'nearest'});}
+function render(){page=Math.min(Math.max(page,0),pages.length-1);state.page=page;state.visited[page]=1;save();const p=pages[page];document.getElementById('pageIntro').innerHTML=`<h1 class="page-title">${esc(p.title)}</h1>`;document.getElementById('content').innerHTML=`<div class="surface">${p.html}</div>`;document.getElementById('counter').textContent=`${page+1} / ${pages.length}`;document.getElementById('prev').disabled=page===0;document.getElementById('next').textContent=page===pages.length-1?(state.finished?'Completed ✓':'Finish lesson ✓'):'Next →';renderNav();paint();if(document.getElementById('tierEditor'))renderTier();window.scrollTo({top:0,behavior:'instant'})}
+function navigate(n){page=Math.max(0,Math.min(n,pages.length-1));render();document.getElementById('rail').classList.remove('open')}
+const tierColors={S:'#dfadae',A:'#edd2a1',B:'#d6e1ae',C:'#b4cadd',F:'#d3bdd6'};
+function renderTier(){const root=document.getElementById('tierEditor');if(!root)return;root.innerHTML=['S','A','B','C','F'].map(t=>`<div class="tier-row"><div class="tier-label" style="background:${tierColors[t]}">${t}<small>${{S:'ICONIC',A:'LOVE IT',B:'SOLID',C:'MID',F:'NOPE'}[t]}</small></div><div class="tier-content">${state.tierItems.map((x,i)=>x.tier===t?`<span class="rank-chip">${esc(x.name)} <select aria-label="Move ${esc(x.name)}" data-tier-move="${i}" style="border:0;background:transparent;color:#7a667b;font-size:12px"><option value="">Move</option>${['S','A','B','C','F'].filter(y=>y!==t).map(y=>`<option value="${y}">${y}</option>`).join('')}</select><button data-tier-delete="${i}" type="button" aria-label="Remove ${esc(x.name)}">×</button></span>`:'').join('')||'<span class="micro">Add something here...</span>'}</div></div>`).join('')}
+document.addEventListener('input',e=>{if(e.target.dataset.input){state.answers[e.target.dataset.input]=e.target.value;state.checked[e.target.dataset.input]=false;save()} });
+document.addEventListener('change',e=>{if(e.target.dataset.radio){state.answers[e.target.dataset.radio]=e.target.value;state.checked[e.target.dataset.radio]=false;save();paint()}if(e.target.dataset.choice){state.answers[e.target.dataset.choice]=e.target.value;state.checked[e.target.dataset.choice]=false;save();paint()}if(e.target.dataset.reflect){state.answers['reflect-'+e.target.dataset.reflect]=e.target.checked;save()}if(e.target.dataset.tierMove){const idx=+e.target.dataset.tierMove;if(e.target.value){state.tierItems[idx].tier=e.target.value;save();renderTier()}}});
+document.addEventListener('click',e=>{const p=e.target.closest('[data-page]');if(p){navigate(+p.dataset.page);return}if(e.target.closest('[data-checkpage]')){checkPage();return}const del=e.target.closest('[data-tier-delete]');if(del){state.tierItems.splice(+del.dataset.tierDelete,1);save();renderTier();return}if(e.target.closest('#addTierItem')){const el=document.getElementById('rankNew'),name=el?.value.trim(),tier=document.getElementById('rankTier')?.value;if(name&&state.tierItems.length<30){state.tierItems.push({name,tier});el.value='';save();renderTier()}return}});
+document.getElementById('prev').onclick=()=>navigate(page-1);document.getElementById('next').onclick=()=>{if(page===pages.length-1){state.finished=true;save();render();return}navigate(page+1)};document.getElementById('menu').onclick=()=>document.getElementById('rail').classList.toggle('open');document.addEventListener('keydown',e=>{if(e.key==='Escape'){document.getElementById('rail').classList.remove('open')}if(e.key==='Enter'&&e.target.id==='rankNew')document.getElementById('addTierItem')?.click()});
+render();
+</script>
+</body></html>
